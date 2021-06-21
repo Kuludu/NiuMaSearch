@@ -20,6 +20,11 @@
         <h2>{{ result.title }}</h2>
         <p>{{ result.content }}</p>
     </div>
+    {% else %}
+    <div style="margin-top: 80px">
+        <hr>
+        <p>啥也没找着呀😓</p>
+    </div>
     {% endfor %}
 </div>
 </body>

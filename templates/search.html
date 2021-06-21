@@ -7,17 +7,19 @@
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
-<div class="container col-md-4">
-     <img
-            class="img-fluid space"
+<div class="container col-md-4 text-center">
+    <img
+            class="space"
             src="/static/banner.png"
             alt="banner"
     />
+    <hr>
+    <small>当前工作模式：{{ mode }}</small>
 </div>
 
 <div class="container col-md-4">
     <form class="space" action="search" method="post">
-        <label for="content" class="form-label">搜什么🐮🐴？</label>
+        <label for="content" class="form-label">请问您打算搜什么🐮🐴？</label>
         <div class="input-group">
             <input
                     id="content-input"
@@ -41,7 +43,7 @@
         crossorigin="anonymous"></script>
 <style>
     .space {
-        margin-top: 80px;
+        margin-top: 60px;
     }
 </style>
 </body>
