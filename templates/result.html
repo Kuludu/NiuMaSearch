@@ -14,11 +14,13 @@
     <h1>搜索结果</h1>
 </div>
 <div class="container">
+    {% for result in results %}
     <div style="margin-top: 80px">
         <hr>
-        <h2>牛马标题</h2>
-        <p>牛马结果。</p>
+        <h2>{{ result.title }}</h2>
+        <p>{{ result.content }}</p>
     </div>
+    {% endfor %}
 </div>
 </body>
 </html>
