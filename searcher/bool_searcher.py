@@ -11,7 +11,7 @@ class BoolSearcher:
 
         results = list()
 
-        for text in self.texts:
+        for text in self.texts['content']:
             check = 0
             for word in s_query:
                 if word in text['words']:
@@ -25,4 +25,4 @@ class BoolSearcher:
 
                 results.append(result)
 
-        return results
+        return self.texts, results
