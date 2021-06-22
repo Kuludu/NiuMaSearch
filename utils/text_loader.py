@@ -1,6 +1,8 @@
 import os
 import string
+import jieba
 
+from zhon.hanzi import punctuation as chinesepunctuation
 from utils.stop_word_loader import load_stop_words
 
 ROOT_DIR = os.path.abspath("./")
@@ -18,7 +20,8 @@ def load_text():
             text['content'] = plain_text
             cleaned_text = clean_text(plain_text)
             removed_text = remove_stop_word(cleaned_text)
-            s_text = removed_text.split()
+            s_text = list(jieba.cut(removed_text))
+            s_text = list(filter(lambda x: x != ' ', s_text))
 
         text['words'] = list(set(s_text))
         p = dict.fromkeys(text['words'])
@@ -38,6 +41,9 @@ def load_text():
 def clean_text(text):
     text = text.replace('\n', '')
     for i in string.punctuation:
+        text = text.replace(i, '')
+
+    for i in chinesepunctuation:
         text = text.replace(i, '')
 
     return text
