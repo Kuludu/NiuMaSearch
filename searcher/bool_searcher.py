@@ -22,6 +22,7 @@ class BoolSearcher():
                 result = dict()
                 result['title'] = text['title']
                 result['content'] = text['content']
+                result['score'] = 0
 
                 results.append(result)
 
