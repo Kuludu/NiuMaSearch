@@ -10,19 +10,19 @@ app = Flask(__name__, static_folder='static')
 
 @app.route('/')
 def main():
-    load_searcher()
+    searcher = get_searcher()
 
-    resp = make_response(render_template('search.html', mode=g.searcher.name))
+    resp = make_response(render_template('search.html', mode=searcher.name))
 
     return resp
 
 
 @app.route('/search', methods=['POST'])
 def search():
-    load_searcher()
+    searcher = get_searcher()
 
     query = request.form.get('content')
-    texts, results = g.searcher.search(query)
+    texts, results = searcher.search(query)
     scored_results = score_text(texts, results, query)
     scored_results.sort(key=lambda x: x['score'], reverse=True)
 
@@ -31,10 +31,8 @@ def search():
     return resp
 
 
-def load_searcher():
-    if 'searcher' not in g:
-        texts = load_text()
-        g.searcher = BoolSearcher(texts)
+def get_searcher():
+    return BoolSearcher(load_text())
 
 
 if __name__ == '__main__':
