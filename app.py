@@ -1,7 +1,9 @@
 from flask import Flask, make_response, render_template, request, g
 
 from searcher.bool_searcher import BoolSearcher
+from searcher.phase_searcher import PhraseSearcher
 from utils.text_loader import load_text
+from utils.text_scorer import score_text
 
 app = Flask(__name__, static_folder='static')
 
@@ -20,8 +22,9 @@ def search():
     load_searcher()
 
     query = request.form.get('content')
-
     results = g.searcher.search(query)
+    score_results = score_text(results, query)
+    sorted(score_results, key=lambda x: x['score'], reverse=True)
 
     resp = make_response(render_template('result.html', results=results))
 

@@ -1,6 +1,5 @@
-class BoolSearcher():
+class BoolSearcher:
     def __init__(self, texts):
-        super().__init__()
         self.name = "布尔查询"
         self.texts = texts
 
