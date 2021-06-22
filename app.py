@@ -23,10 +23,10 @@ def search():
 
     query = request.form.get('content')
     texts, results = g.searcher.search(query)
-    score_results = score_text(texts, results, query)
-    sorted(score_results, key=lambda x: x['score'], reverse=True)
+    scored_results = score_text(texts, results, query)
+    scored_results.sort(key=lambda x: x['score'], reverse=True)
 
-    resp = make_response(render_template('result.html', results=results))
+    resp = make_response(render_template('result.html', results=scored_results))
 
     return resp
 

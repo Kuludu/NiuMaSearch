@@ -12,8 +12,9 @@ STOP_WORDS = load_stop_words()
 def load_text():
     results = filter(lambda x: '.txt' in x, os.listdir(ROOT_DIR + '/documents'))
     texts = dict()
-    texts['content'] = list()
+    texts['content'] = dict()
     total_words = set()
+    docID = 1
     for result in results:
         text = dict()
         text['title'] = result
@@ -35,8 +36,10 @@ def load_text():
             p[cur].append(cnt)
             cnt += 1
         text['p_table'] = p
+        text['len'] = len(s_text)
 
-        texts['content'].append(text)
+        texts['content'][docID] = text
+        docID += 1
 
     texts['ir'] = gen_ir(texts['content'], list(total_words))
 
@@ -67,7 +70,7 @@ def gen_ir(texts, total_words):
     for word in total_words:
         ir[word] = list()
         index = 1
-        for text in texts:
+        for text in texts.values():
             if word in text['words']:
                 ir[word].append(index)
             index += 1

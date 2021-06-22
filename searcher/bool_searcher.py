@@ -11,14 +11,16 @@ class BoolSearcher:
 
         results = list()
 
-        for text in self.texts['content']:
+        for key, text in self.texts['content'].items():
             check = 0
             for word in s_query:
                 if word in text['words']:
                     check += 1
                     continue
+
             if check == len(s_query):
                 result = dict()
+                result['docID'] = key
                 result['title'] = text['title']
                 result['content'] = text['content']
                 result['score'] = 0
