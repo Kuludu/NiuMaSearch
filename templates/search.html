@@ -14,26 +14,62 @@
             alt="banner"
     />
     <hr>
-    <small>当前工作模式：{{ mode }}</small>
+    <small>请问您打算搜什么🐮🐴？</small>
 </div>
 
-<div class="container col-md-4">
-    <form class="space" action="search" method="post">
-        <label for="content" class="form-label">请问您打算搜什么🐮🐴？</label>
-        <div class="input-group">
-            <input
-                    id="content-input"
-                    class="form-control"
-                    name="content"
-                    role="search"
-                    placeholder="搜索..."
-                    required
-                    type="text"
-            />
-            <button class="btn btn-outline-secondary" type="submit">嗖！</button>
-        </div>
-    </form>
+<div class="row">
+    <div class="container col-4">
+        <form class="space" action="boolsearch" method="post">
+            <label for="content" class="form-label">布尔查询</label>
+            <div class="input-group">
+                <input
+                        id="content-input"
+                        class="form-control"
+                        name="content"
+                        role="search"
+                        placeholder="搜索..."
+                        required
+                        type="text"
+                />
+                <button class="btn btn-outline-secondary" type="submit">嗖！</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container col-4">
+        <form class="space" action="phrasesearch" method="post">
+            <label for="content" class="form-label">短语查询（k=3）</label>
+            <div class="input-group">
+                <input
+                        id="content-input"
+                        class="form-control"
+                        name="content"
+                        role="search"
+                        placeholder="搜索..."
+                        required
+                        type="text"
+                />
+                <button class="btn btn-outline-secondary" type="submit">嘎！</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<div class="container text-center" style="margin-top: 60px">
+    <hr>
+    <h4>牛马搜索引擎温馨提示您：</h4>
+    <p>用符号<span class="badge bg-danger">!</span>表示<span class="badge bg-danger">NOT</span>。 </p>
+    <p>用符号<span class="badge bg-success">|</span>表示<span class="badge bg-success">OR</span>。</p>
+    <p>用符号<span class="badge bg-info">&</span>表示<span class="badge bg-info">AND</span>。</p>
+    <p>例如：cow & horse</p>
+    <p>表示：cow AND horse</p>
+</div>
+
+<footer class="container bg-light text-center text-lg-start" style="margin-top: 60px">
+    <div class="text-center p-3">
+        2021-智能信息检索课程设计
+    </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"

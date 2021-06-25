@@ -10,29 +10,32 @@ app = Flask(__name__, static_folder='static')
 
 @app.route('/')
 def main():
-    searcher = get_searcher()
-
-    resp = make_response(render_template('search.html', mode=searcher.name))
+    resp = make_response(render_template('search.html'))
 
     return resp
 
 
-@app.route('/search', methods=['POST'])
-def search():
-    searcher = get_searcher()
+@app.route('/boolsearch', methods=['POST'])
+def bool_search():
+    searcher = BoolSearcher(load_text())
 
+    return render_search(searcher)
+
+
+@app.route('/phrasesearch', methods=['POST'])
+def phrase_search():
+    searcher = PhraseSearcher(load_text())
+
+    return render_search(searcher)
+
+
+def render_search(searcher):
     query = request.form.get('content')
     texts, results = searcher.search(query)
     scored_results = score_text(texts, results, query)
     scored_results.sort(key=lambda x: x['score'], reverse=True)
 
-    resp = make_response(render_template('result.html', results=scored_results))
-
-    return resp
-
-
-def get_searcher():
-    return BoolSearcher(load_text())
+    return make_response(render_template('result.html', results=scored_results))
 
 
 if __name__ == '__main__':

@@ -17,7 +17,11 @@
     {% for result in results %}
         <div style="margin-top: 80px">
             <hr>
-            <h2>{{ result.title }} <span class="badge bg-primary">{{ result.score }}</span></h2>
+            {% if result.score == 0 %}
+                <h2>{{ result.title }}</h2>
+            {% else %}
+                <h2>{{ result.title }}-<span class="badge bg-primary">{{ result.score }}</span></h2>
+            {% endif %}
             <p>{{ result.content }}</p>
         </div>
     {% else %}
