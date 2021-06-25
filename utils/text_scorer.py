@@ -1,8 +1,13 @@
+import string
 from collections import Counter
 from math import log
 
 
 def score_text(texts, results, query):
+    for punctuation in string.punctuation:
+        if punctuation in query:
+            return results
+
     query_c = dict(Counter(query.split()))
     d_c = len(texts['content'])
 

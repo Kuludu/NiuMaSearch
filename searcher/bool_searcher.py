@@ -7,18 +7,28 @@ class BoolSearcher:
         self.texts = texts
 
     def search(self, query):
-        s_query = query.split()
-
         results = list()
 
-        for key, text in self.texts['content'].items():
-            check = 0
-            for word in s_query:
-                if word in text['words']:
-                    check += 1
-                    continue
+        s_query = query.split()
+        phrase = ['!', '&', '|', '(', ')']
+        eval_query = str()
+        for q in s_query:
+            if q not in phrase:
+                eval_query += '"' + q + '" in word'
+            elif q == '&':
+                eval_query += ' and '
+            elif q == '|':
+                eval_query += ' or '
+            elif q == '!':
+                eval_query += ' not '
+            else:
+                eval_query += q
 
-            if check == len(s_query):
+        print(eval_query)
+
+        for key, text in self.texts['content'].items():
+            word = text['words']
+            if eval(eval_query):
                 result = dict()
                 result['docID'] = key
                 result['title'] = text['title']
