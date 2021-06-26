@@ -24,8 +24,6 @@ class BoolSearcher:
             else:
                 eval_query += q
 
-        print(eval_query)
-
         for key, text in self.texts['content'].items():
             word = text['words']
             if eval(eval_query):
